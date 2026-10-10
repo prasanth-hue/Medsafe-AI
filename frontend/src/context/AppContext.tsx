@@ -1,0 +1,92 @@
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, ReactNode } from "react";
+import { api } from "../services/api";
+import type { CheckResult, PageId, Patient, User } from "../types";
+
+const PAGES: PageId[] = ["dashboard", "patients", "scanner", "medicines", "schedule", "checker", "explain", "model", "evidence", "assistant", "subscription", "elder-agent", "settings"];
+type Params = Record<string, any>;
+
+interface Ctx {
+  page: PageId; params: Params; navigate: (page: PageId, params?: Params) => void;
+  patients: Patient[]; activePatient: Patient | null; setActivePatientId: (id: number) => void;
+  refreshPatients: () => Promise<void>; backendError: string | null; loading: boolean;
+  lastCheck: CheckResult | null; setLastCheck: (c: CheckResult | null) => void;
+  user: User | null; setUser: (u: User | null) => void; logout: () => void;
+}
+const AppCtx = createContext<Ctx>(null as unknown as Ctx);
+export const useApp = () => useContext(AppCtx);
+
+function pageFromHash(): PageId {
+  const h = window.location.hash.replace(/^#\/?/, "") as PageId;
+  return PAGES.includes(h) ? h : "dashboard";
+}
+
+export function AppProvider({ children }: { children: ReactNode }) {
+  const [page, setPage] = useState<PageId>(pageFromHash());
+  const [params, setParams] = useState<Params>({});
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [activeId, setActiveId] = useState<number | null>(() => {
+    const v = localStorage.getItem("medsafe.activePatient");
+    return v ? Number(v) : null;
+  });
+  const [user, setUserState] = useState<User | null>(() => {
+    try {
+      const saved = localStorage.getItem("medsafe.user");
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+  const [backendError, setBackendError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [lastCheck, setLastCheck] = useState<CheckResult | null>(null);
+
+  const setUser = useCallback((u: User | null) => {
+    setUserState(u);
+    if (u) {
+      localStorage.setItem("medsafe.user", JSON.stringify(u));
+    } else {
+      localStorage.removeItem("medsafe.user");
+    }
+  }, []);
+
+  const logout = useCallback(() => {
+    setUser(null);
+  }, [setUser]);
+
+  useEffect(() => {
+    const onHash = () => setPage(pageFromHash());
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  const navigate = useCallback((p: PageId, prm: Params = {}) => {
+    setParams(prm);
+    window.location.hash = `/${p}`;
+    setPage(p);
+    window.scrollTo({ top: 0 });
+  }, []);
+
+  const refreshPatients = useCallback(async () => {
+    try {
+      const list = (await api.patients()) as Patient[];
+      setPatients(list);
+      setBackendError(null);
+      setActiveId((cur) => (cur && list.some((p) => p.id === cur) ? cur : list[0]?.id ?? null));
+    } catch (e: any) {
+      setBackendError(e.message);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { refreshPatients(); }, [refreshPatients]);
+  useEffect(() => { if (activeId) localStorage.setItem("medsafe.activePatient", String(activeId)); }, [activeId]);
+
+  const value = useMemo<Ctx>(() => ({
+    page, params, navigate, patients, activePatient: patients.find((p) => p.id === activeId) ?? null,
+    setActivePatientId: setActiveId, refreshPatients, backendError, loading, lastCheck, setLastCheck,
+    user, setUser, logout,
+  }), [page, params, navigate, patients, activeId, refreshPatients, backendError, loading, lastCheck, user, setUser, logout]);
+
+  return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;
+}

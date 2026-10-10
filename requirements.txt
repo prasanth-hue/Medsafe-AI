@@ -1,0 +1,18 @@
+# Web API
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+pydantic>=2.6
+
+# OCR (also install the Tesseract program itself - see START_HERE.md)
+pytesseract>=0.3.10
+Pillow>=10.1
+
+# ML / evaluation. torch is only needed to TRAIN the model (python -m backend.ml.train);
+# the running website uses numpy-only inference. torch_geometric is NOT required.
+numpy>=1.26
+scikit-learn>=1.4
+torch>=2.2
+
+# Tests
+httpx>=0.27

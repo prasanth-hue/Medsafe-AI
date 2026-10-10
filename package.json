@@ -1,0 +1,12 @@
+{
+  "name": "medsafe-ai",
+  "private": true,
+  "version": "1.0.0",
+  "description": "MedSafe AI - Explainable AI for Personalized Medication Safety",
+  "scripts": {
+    "install:frontend": "npm --prefix frontend install",
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "typecheck": "npm --prefix frontend run typecheck"
+  }
+}
