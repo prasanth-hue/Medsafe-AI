@@ -21,24 +21,38 @@ function pageFromHash(): PageId {
   return PAGES.includes(h) ? h : "dashboard";
 }
 
+const DEFAULT_USER: User = {
+  id: 1,
+  name: "Dr. Sarah Mitchell",
+  email: "doctor@medsafe.ai",
+  phone: "+1 555-019-2834",
+  role: "Chief Clinician",
+  plan: "pro",
+  plan_name: "Pro Clinician",
+  plan_price_inr: 2499,
+  days_left: 30,
+  subscription_status: "active",
+  created_at: new Date().toISOString(),
+};
+
 export function AppProvider({ children }: { children: ReactNode }) {
   const [page, setPage] = useState<PageId>(pageFromHash());
   const [params, setParams] = useState<Params>({});
   const [patients, setPatients] = useState<Patient[]>([]);
   const [activeId, setActiveId] = useState<number | null>(() => {
     const v = localStorage.getItem("medsafe.activePatient");
-    return v ? Number(v) : null;
+    return v ? Number(v) : 1;
   });
   const [user, setUserState] = useState<User | null>(() => {
     try {
       const saved = localStorage.getItem("medsafe.user");
-      return saved ? JSON.parse(saved) : null;
+      return saved ? JSON.parse(saved) : DEFAULT_USER;
     } catch {
-      return null;
+      return DEFAULT_USER;
     }
   });
   const [backendError, setBackendError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [lastCheck, setLastCheck] = useState<CheckResult | null>(null);
   const [isMockMode, setIsMockMode] = useState<boolean>(isUsingMockEngine);
 

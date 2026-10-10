@@ -617,13 +617,37 @@ export const mockEngine = {
     const patient = list.find((p) => p.id === patientId) || list[0];
     const sched = mockDb.getSchedule().filter((s) => s.patient_id === patient.id);
     const logs = mockDb.getLogs().filter((l) => l.patient_id === patient.id);
+    const rawMeds = (medicinesData as any).medicines || [];
+
+    const medsList = (patient.medicines || []).map((mid: string) => {
+      const found = rawMeds.find((m: any) => m.id === mid.toLowerCase());
+      return { id: mid, name: found ? found.name : mid.toUpperCase() };
+    });
+
+    const checkRes = await mockEngine.check(patient.medicines || [], patient.id);
 
     return {
       patient,
-      scheduled_count: sched.length,
-      medicines_count: patient.medicines.length,
-      alerts_count: 1,
-      high_risk_pairs: 1,
+      medicines: medsList,
+      alert_counts: checkRes.counts || { HIGH: 0, MODERATE: 0, LOW: 0, UNKNOWN: 0 },
+      overall_risk: checkRes.overall_risk,
+      top_alerts: (checkRes.pairs || []).slice(0, 3).map((p) => ({
+        a: p.a_name,
+        b: p.b_name,
+        risk: p.risk,
+        summary: p.summary,
+      })),
+      schedule_count: sched.length,
+      last_scan: {
+        created_at: new Date().toISOString(),
+        medicine: "Omeprazole",
+        confident: true,
+      },
+      model: {
+        trained: true,
+        name: "GCN-v2.4",
+      },
+      disclaimer: "MedSafe AI is an educational clinical decision support prototype.",
       adherence_rate: "94.2%",
       last_voice_call: logs.find((l) => l.channel === "call")?.created_at || new Date().toISOString(),
       last_sms: logs.find((l) => l.channel === "sms")?.created_at || new Date().toISOString(),

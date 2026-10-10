@@ -183,35 +183,35 @@ export default function Dashboard() {
               "01",
               User,
               "Active Case",
-              data.patient.name,
-              <span>AGE {data.patient.age ?? "N/A"}{data.patient.is_demo ? " // DEMO CASE" : ""}</span>,
+              data?.patient?.name ?? "Demo Case",
+              <span>AGE {data?.patient?.age ?? "N/A"}{data?.patient?.is_demo ? " // DEMO CASE" : ""}</span>,
               () => navigate("patients")
             )}
             {stat(
               "02",
               Pill,
               "Prescription Regimen",
-              `${data.medicines.length} Drugs`,
-              <span className="truncate block uppercase">{data.medicines.map((m: any) => m.name).join(", ") || "None"}</span>,
+              `${data?.medicines?.length ?? 0} Drugs`,
+              <span className="truncate block uppercase">{(data?.medicines || []).map((m: any) => m.name).join(", ") || "None"}</span>,
               () => navigate("patients")
             )}
             {stat(
               "03",
               TriangleAlert,
               "Identified Conflicts",
-              `${data.alert_counts.HIGH + data.alert_counts.MODERATE} Total`,
+              `${(data?.alert_counts?.HIGH || 0) + (data?.alert_counts?.MODERATE || 0)} Total`,
               <span className="flex gap-3 font-mono font-bold">
-                <span className="text-rose-400">{data.alert_counts.HIGH} CRITICAL</span>
-                <span className="text-amber-400">{data.alert_counts.MODERATE} MOD</span>
-                <span className="text-emerald-400">{data.alert_counts.LOW} LOW</span>
+                <span className="text-rose-400">{data?.alert_counts?.HIGH ?? 0} CRITICAL</span>
+                <span className="text-amber-400">{data?.alert_counts?.MODERATE ?? 0} MOD</span>
+                <span className="text-emerald-400">{data?.alert_counts?.LOW ?? 0} LOW</span>
               </span>,
-              () => navigate("checker", { medicines: data.medicines.map((m: any) => m.name) })
+              () => navigate("checker", { medicines: (data?.medicines || []).map((m: any) => m.name) })
             )}
             {stat(
               "04",
               CalendarClock,
               "Dosage Schedule",
-              `${data.schedule_count} Timed Doses`,
+              `${data?.schedule_count ?? 0} Timed Doses`,
               "MONITORED MEAL & BEDTIME WINDOWS",
               () => navigate("schedule")
             )}
@@ -219,28 +219,28 @@ export default function Dashboard() {
               "05",
               ScanLine,
               "Prescription Vision",
-              data.last_scan ? (data.last_scan.medicine ?? "RECOGNIZED") : "READY",
-              data.last_scan ? `TIMESTAMP: ${new Date(data.last_scan.created_at).toLocaleTimeString()}` : "SCAN DRUG LABEL PHOTO",
+              data?.last_scan ? (data.last_scan.medicine ?? "RECOGNIZED") : "READY",
+              data?.last_scan ? `TIMESTAMP: ${new Date(data.last_scan.created_at).toLocaleTimeString()}` : "SCAN DRUG LABEL PHOTO",
               () => navigate("scanner")
             )}
             {stat(
               "06",
               Workflow,
               "Inference Engine",
-              data.model.trained ? "GCN LINK ACTIVE" : "HEURISTIC GRAPH",
-              data.model.name.toUpperCase(),
+              data?.model?.trained ? "GCN LINK ACTIVE" : "HEURISTIC GRAPH",
+              (data?.model?.name ?? "GCN-V2.4").toUpperCase(),
               () => navigate("model")
             )}
           </div>
 
           {/* Highest-Priority Combinations */}
-          {data.top_alerts.length > 0 && (
+          {(data?.top_alerts || []).length > 0 && (
             <Card
               title="Prioritized Adverse Drug Interactions"
               action={
                 <Button
                   variant="secondary"
-                  onClick={() => navigate("checker", { medicines: data.medicines.map((m: any) => m.name) })}
+                  onClick={() => navigate("checker", { medicines: (data?.medicines || []).map((m: any) => m.name) })}
                 >
                   Open Full Checker
                 </Button>
