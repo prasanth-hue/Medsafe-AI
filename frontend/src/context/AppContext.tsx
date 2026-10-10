@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, ReactNode } from "react";
-import { api } from "../services/api";
+import { api, isUsingMockEngine, subscribeMockStatus } from "../services/api";
 import type { CheckResult, PageId, Patient, User } from "../types";
 
 const PAGES: PageId[] = ["dashboard", "patients", "scanner", "medicines", "schedule", "checker", "explain", "model", "evidence", "assistant", "subscription", "elder-agent", "settings"];
@@ -11,6 +11,7 @@ interface Ctx {
   refreshPatients: () => Promise<void>; backendError: string | null; loading: boolean;
   lastCheck: CheckResult | null; setLastCheck: (c: CheckResult | null) => void;
   user: User | null; setUser: (u: User | null) => void; logout: () => void;
+  isMockMode: boolean;
 }
 const AppCtx = createContext<Ctx>(null as unknown as Ctx);
 export const useApp = () => useContext(AppCtx);
@@ -39,6 +40,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [backendError, setBackendError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [lastCheck, setLastCheck] = useState<CheckResult | null>(null);
+  const [isMockMode, setIsMockMode] = useState<boolean>(isUsingMockEngine);
+
+  useEffect(() => {
+    return subscribeMockStatus(setIsMockMode);
+  }, []);
 
   const setUser = useCallback((u: User | null) => {
     setUserState(u);
@@ -73,6 +79,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setBackendError(null);
       setActiveId((cur) => (cur && list.some((p) => p.id === cur) ? cur : list[0]?.id ?? null));
     } catch (e: any) {
+      // In case both backend and mock fails
       setBackendError(e.message);
     } finally {
       setLoading(false);
@@ -85,8 +92,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const value = useMemo<Ctx>(() => ({
     page, params, navigate, patients, activePatient: patients.find((p) => p.id === activeId) ?? null,
     setActivePatientId: setActiveId, refreshPatients, backendError, loading, lastCheck, setLastCheck,
-    user, setUser, logout,
-  }), [page, params, navigate, patients, activeId, refreshPatients, backendError, loading, lastCheck, user, setUser, logout]);
+    user, setUser, logout, isMockMode,
+  }), [page, params, navigate, patients, activeId, refreshPatients, backendError, loading, lastCheck, user, setUser, logout, isMockMode]);
 
   return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;
 }

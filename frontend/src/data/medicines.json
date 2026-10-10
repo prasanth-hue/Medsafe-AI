@@ -1,0 +1,1007 @@
+{
+ "_meta": {
+  "label": "MedSafe AI demonstration knowledge base",
+  "note": "Compact, hand-curated educational summaries of widely documented pharmacology. This is NOT DrugBank or any licensed dataset and is not exhaustive. Always verify against current official labelling.",
+  "entities": {
+   "CYP2C9": "Enzyme",
+   "CYP2C19": "Enzyme",
+   "CYP3A4": "Enzyme",
+   "CYP2D6": "Enzyme",
+   "COX1": "Protein",
+   "COX2": "Protein",
+   "VKORC1": "Protein",
+   "P2Y12": "Protein",
+   "PGP": "Protein",
+   "ACE": "Protein",
+   "AT1R": "Protein",
+   "MR": "Protein",
+   "SERT": "Protein",
+   "MOR": "Protein",
+   "HMGCR": "Protein",
+   "NAKATPASE": "Protein",
+   "PDE5": "Protein",
+   "NKCC2": "Protein",
+   "DHFR": "Protein",
+   "PROTON_PUMP": "Protein",
+   "L_CA_CHANNEL": "Protein",
+   "OCT2": "Protein",
+   "THYROID_RECEPTOR": "Protein",
+   "GYRASE": "Protein",
+   "CYP51": "Protein",
+   "BACT_RIBOSOME": "Protein",
+   "CYP1A2": "Enzyme"
+  }
+ },
+ "medicines": [
+  {
+   "id": "warfarin",
+   "name": "Warfarin",
+   "aliases": [
+    "coumadin",
+    "jantoven"
+   ],
+   "cls": "Anticoagulant (vitamin K antagonist)",
+   "use": "Used to reduce the risk of harmful blood clots, for example in atrial fibrillation or after a clot in a vein or artery.",
+   "admin": "Dose is individualised and adjusted using blood tests (INR). It is generally taken at a consistent time each day. Follow your prescriber's schedule exactly.",
+   "warnings": [
+    "Increases bleeding risk; report unusual bruising, black stools or prolonged bleeding.",
+    "Many medicines, supplements and diet changes can alter its effect.",
+    "Regular INR monitoring is part of safe use."
+   ],
+   "substrate": [
+    "CYP2C9",
+    "CYP3A4",
+    "CYP2C19",
+    "CYP1A2"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "VKORC1"
+   ],
+   "pathways": [
+    "coagulation"
+   ],
+   "adverse": [
+    "bleeding"
+   ],
+   "indications": [
+    "thrombosis",
+    "atrial_fibrillation"
+   ]
+  },
+  {
+   "id": "aspirin",
+   "name": "Aspirin",
+   "aliases": [
+    "acetylsalicylic acid",
+    "asa",
+    "ecosprin",
+    "disprin",
+    "bayer aspirin"
+   ],
+   "cls": "Antiplatelet / NSAID",
+   "use": "Low doses are used to reduce platelet clumping in people at risk of heart attack or stroke; higher doses relieve pain, fever and inflammation.",
+   "admin": "Enteric-coated and plain forms exist. Follow the label or prescription for your specific indication.",
+   "warnings": [
+    "Can irritate the stomach and increase bleeding risk.",
+    "Not for children and teenagers with viral illness (Reye syndrome risk).",
+    "Avoid if previously allergic to aspirin or other NSAIDs unless advised by a clinician."
+   ],
+   "substrate": [],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "COX1",
+    "COX2"
+   ],
+   "pathways": [
+    "platelet_aggregation",
+    "prostaglandin_synthesis"
+   ],
+   "adverse": [
+    "bleeding",
+    "gi_ulcer"
+   ],
+   "indications": [
+    "thrombosis",
+    "pain",
+    "angina"
+   ]
+  },
+  {
+   "id": "omeprazole",
+   "name": "Omeprazole",
+   "aliases": [
+    "prilosec",
+    "omez",
+    "losec"
+   ],
+   "cls": "Proton pump inhibitor",
+   "use": "Reduces stomach acid; used for reflux, ulcers and to protect the stomach during some long-term treatments.",
+   "admin": "Delayed-release capsules or tablets are usually swallowed whole. Timing relative to meals is given on your label or prescription.",
+   "warnings": [
+    "Long-term use may affect magnesium, vitamin B12 and bone health.",
+    "Can reduce activation of some medicines (e.g. clopidogrel) via CYP2C19.",
+    "Persistent stomach symptoms should be assessed by a clinician."
+   ],
+   "substrate": [
+    "CYP2C19",
+    "CYP3A4"
+   ],
+   "inhibits": [
+    "CYP2C19"
+   ],
+   "induces": [],
+   "targets": [
+    "PROTON_PUMP"
+   ],
+   "pathways": [
+    "gastric_acid_secretion"
+   ],
+   "adverse": [],
+   "indications": [
+    "gerd"
+   ]
+  },
+  {
+   "id": "ibuprofen",
+   "name": "Ibuprofen",
+   "aliases": [
+    "advil",
+    "motrin",
+    "brufen",
+    "nurofen"
+   ],
+   "cls": "NSAID",
+   "use": "Relieves pain, fever and inflammation.",
+   "admin": "Usually taken with food or milk to reduce stomach upset; use the lowest effective dose as directed on the label.",
+   "warnings": [
+    "Can cause stomach ulcers and bleeding.",
+    "May raise blood pressure and affect kidney function.",
+    "May interfere with the antiplatelet effect of low-dose aspirin."
+   ],
+   "substrate": [
+    "CYP2C9"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "COX1",
+    "COX2"
+   ],
+   "pathways": [
+    "prostaglandin_synthesis"
+   ],
+   "adverse": [
+    "bleeding",
+    "gi_ulcer",
+    "nephrotoxicity"
+   ],
+   "indications": [
+    "pain",
+    "arthritis"
+   ]
+  },
+  {
+   "id": "paracetamol",
+   "name": "Paracetamol (Acetaminophen)",
+   "aliases": [
+    "acetaminophen",
+    "tylenol",
+    "panadol",
+    "crocin",
+    "dolo",
+    "calpol"
+   ],
+   "cls": "Analgesic / antipyretic",
+   "use": "Relieves mild to moderate pain and reduces fever.",
+   "admin": "Many combination products contain paracetamol; always check totals on all labels. Follow the label for maximum daily limits.",
+   "warnings": [
+    "Overdose can cause serious liver damage.",
+    "Regular high intake can raise INR in people taking warfarin.",
+    "Check combination cold/flu products for hidden paracetamol."
+   ],
+   "substrate": [
+    "CYP2D6",
+    "CYP3A4"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "COX2"
+   ],
+   "pathways": [
+    "prostaglandin_synthesis"
+   ],
+   "adverse": [
+    "hepatotoxicity"
+   ],
+   "indications": [
+    "pain"
+   ]
+  },
+  {
+   "id": "metformin",
+   "name": "Metformin",
+   "aliases": [
+    "glucophage",
+    "glycomet"
+   ],
+   "cls": "Biguanide antidiabetic",
+   "use": "Helps control blood glucose in type 2 diabetes.",
+   "admin": "Commonly taken with meals to reduce digestive upset; extended-release forms differ. Follow your prescription.",
+   "warnings": [
+    "Rare but serious lactic acidosis, mainly with kidney impairment.",
+    "Kidney function is monitored during treatment.",
+    "Tell clinicians before contrast imaging or surgery."
+   ],
+   "substrate": [
+    "OCT2"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "OCT2"
+   ],
+   "pathways": [
+    "glucose_metabolism"
+   ],
+   "adverse": [
+    "lactic_acidosis"
+   ],
+   "indications": [
+    "diabetes"
+   ]
+  },
+  {
+   "id": "amlodipine",
+   "name": "Amlodipine",
+   "aliases": [
+    "norvasc",
+    "amlip",
+    "amlong"
+   ],
+   "cls": "Calcium channel blocker",
+   "use": "Lowers blood pressure and helps prevent angina.",
+   "admin": "Usually taken once daily; follow your prescription.",
+   "warnings": [
+    "May cause ankle swelling, flushing or dizziness.",
+    "Effects can be increased by strong CYP3A4 inhibitors."
+   ],
+   "substrate": [
+    "CYP3A4"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "L_CA_CHANNEL"
+   ],
+   "pathways": [
+    "vascular_tone"
+   ],
+   "adverse": [
+    "hypotension"
+   ],
+   "indications": [
+    "hypertension",
+    "angina"
+   ]
+  },
+  {
+   "id": "atorvastatin",
+   "name": "Atorvastatin",
+   "aliases": [
+    "lipitor",
+    "atorva"
+   ],
+   "cls": "Statin (HMG-CoA reductase inhibitor)",
+   "use": "Lowers cholesterol and reduces cardiovascular risk.",
+   "admin": "Follow the prescription; timing is specified by your prescriber.",
+   "warnings": [
+    "Report unexplained muscle pain or weakness.",
+    "Liver tests may be monitored.",
+    "Levels can rise with strong CYP3A4 inhibitors."
+   ],
+   "substrate": [
+    "CYP3A4"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "HMGCR"
+   ],
+   "pathways": [
+    "cholesterol_biosynthesis"
+   ],
+   "adverse": [
+    "myopathy"
+   ],
+   "indications": [
+    "hyperlipidemia"
+   ]
+  },
+  {
+   "id": "simvastatin",
+   "name": "Simvastatin",
+   "aliases": [
+    "zocor"
+   ],
+   "cls": "Statin (HMG-CoA reductase inhibitor)",
+   "use": "Lowers cholesterol and reduces cardiovascular risk.",
+   "admin": "Follow the prescription; timing is specified by your prescriber.",
+   "warnings": [
+    "Higher risk of muscle injury with certain interacting medicines.",
+    "Avoid grapefruit juice in large amounts unless advised."
+   ],
+   "substrate": [
+    "CYP3A4"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "HMGCR"
+   ],
+   "pathways": [
+    "cholesterol_biosynthesis"
+   ],
+   "adverse": [
+    "myopathy"
+   ],
+   "indications": [
+    "hyperlipidemia"
+   ]
+  },
+  {
+   "id": "clopidogrel",
+   "name": "Clopidogrel",
+   "aliases": [
+    "plavix",
+    "clopilet"
+   ],
+   "cls": "Antiplatelet (P2Y12 inhibitor)",
+   "use": "Reduces the risk of clots after heart attack, stent placement or stroke.",
+   "admin": "Follow the prescription; do not stop without medical advice.",
+   "warnings": [
+    "Increases bleeding risk.",
+    "Needs CYP2C19 to be activated; some medicines reduce this.",
+    "Tell clinicians before surgery or dental procedures."
+   ],
+   "substrate": [
+    "CYP2C19",
+    "CYP3A4"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "P2Y12"
+   ],
+   "pathways": [
+    "platelet_aggregation"
+   ],
+   "adverse": [
+    "bleeding"
+   ],
+   "indications": [
+    "thrombosis"
+   ]
+  },
+  {
+   "id": "lisinopril",
+   "name": "Lisinopril",
+   "aliases": [
+    "zestril",
+    "prinivil",
+    "listril"
+   ],
+   "cls": "ACE inhibitor",
+   "use": "Treats high blood pressure and heart failure and protects the kidneys in some conditions.",
+   "admin": "Follow your prescription.",
+   "warnings": [
+    "Can raise potassium.",
+    "Dry cough is common; swelling of face or lips needs urgent care.",
+    "Avoid in pregnancy."
+   ],
+   "substrate": [],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "ACE"
+   ],
+   "pathways": [
+    "raas"
+   ],
+   "adverse": [
+    "hyperkalemia",
+    "hypotension"
+   ],
+   "indications": [
+    "hypertension",
+    "heart_failure"
+   ]
+  },
+  {
+   "id": "losartan",
+   "name": "Losartan",
+   "aliases": [
+    "cozaar",
+    "losar"
+   ],
+   "cls": "Angiotensin receptor blocker",
+   "use": "Treats high blood pressure and protects the kidneys in some conditions.",
+   "admin": "Follow your prescription.",
+   "warnings": [
+    "Can raise potassium.",
+    "Avoid in pregnancy."
+   ],
+   "substrate": [
+    "CYP2C9",
+    "CYP3A4"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "AT1R"
+   ],
+   "pathways": [
+    "raas"
+   ],
+   "adverse": [
+    "hyperkalemia",
+    "hypotension"
+   ],
+   "indications": [
+    "hypertension",
+    "heart_failure"
+   ]
+  },
+  {
+   "id": "digoxin",
+   "name": "Digoxin",
+   "aliases": [
+    "lanoxin"
+   ],
+   "cls": "Cardiac glycoside",
+   "use": "Used for certain heart rhythm problems and heart failure.",
+   "admin": "Narrow therapeutic range; follow your prescription and monitoring schedule.",
+   "warnings": [
+    "Toxicity can cause nausea, vision changes and dangerous rhythm problems.",
+    "Blood levels are raised by several medicines (e.g. amiodarone).",
+    "Low potassium increases toxicity risk."
+   ],
+   "substrate": [
+    "PGP"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "NAKATPASE"
+   ],
+   "pathways": [
+    "cardiac_contractility"
+   ],
+   "adverse": [
+    "qt_prolongation",
+    "hypokalemia"
+   ],
+   "indications": [
+    "atrial_fibrillation",
+    "heart_failure"
+   ]
+  },
+  {
+   "id": "amiodarone",
+   "name": "Amiodarone",
+   "aliases": [
+    "cordarone",
+    "pacerone"
+   ],
+   "cls": "Antiarrhythmic",
+   "use": "Treats serious heart rhythm disorders.",
+   "admin": "Specialist-initiated; follow your prescription and monitoring.",
+   "warnings": [
+    "Affects thyroid, lung, liver and eyes with long-term use.",
+    "Inhibits several enzymes and transporters, so it interacts with many medicines.",
+    "Can prolong the QT interval."
+   ],
+   "substrate": [
+    "CYP3A4",
+    "CYP2C9"
+   ],
+   "inhibits": [
+    "CYP2C9",
+    "CYP3A4",
+    "CYP2D6",
+    "PGP"
+   ],
+   "induces": [],
+   "targets": [],
+   "pathways": [
+    "cardiac_contractility"
+   ],
+   "adverse": [
+    "qt_prolongation",
+    "hepatotoxicity"
+   ],
+   "indications": [
+    "atrial_fibrillation"
+   ]
+  },
+  {
+   "id": "fluoxetine",
+   "name": "Fluoxetine",
+   "aliases": [
+    "prozac",
+    "fludac"
+   ],
+   "cls": "SSRI antidepressant",
+   "use": "Treats depression, anxiety-related conditions and some other disorders.",
+   "admin": "Follow your prescription; do not stop suddenly without advice.",
+   "warnings": [
+    "Can increase bleeding tendency, especially with NSAIDs or anticoagulants.",
+    "Inhibits CYP2D6 and CYP2C9.",
+    "Report agitation, fever, tremor or confusion urgently when combined with other serotonergic medicines."
+   ],
+   "substrate": [
+    "CYP2D6",
+    "CYP2C9"
+   ],
+   "inhibits": [
+    "CYP2D6",
+    "CYP2C9",
+    "CYP2C19"
+   ],
+   "induces": [],
+   "targets": [
+    "SERT"
+   ],
+   "pathways": [
+    "serotonin_signaling"
+   ],
+   "adverse": [
+    "serotonin_syndrome",
+    "bleeding"
+   ],
+   "indications": [
+    "depression"
+   ]
+  },
+  {
+   "id": "sertraline",
+   "name": "Sertraline",
+   "aliases": [
+    "zoloft",
+    "serlift"
+   ],
+   "cls": "SSRI antidepressant",
+   "use": "Treats depression, anxiety-related conditions and some other disorders.",
+   "admin": "Follow your prescription; do not stop suddenly without advice.",
+   "warnings": [
+    "Can increase bleeding tendency, especially with NSAIDs or anticoagulants.",
+    "Report agitation, fever, tremor or confusion urgently when combined with other serotonergic medicines."
+   ],
+   "substrate": [
+    "CYP2C19",
+    "CYP3A4"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "SERT"
+   ],
+   "pathways": [
+    "serotonin_signaling"
+   ],
+   "adverse": [
+    "serotonin_syndrome",
+    "bleeding"
+   ],
+   "indications": [
+    "depression"
+   ]
+  },
+  {
+   "id": "tramadol",
+   "name": "Tramadol",
+   "aliases": [
+    "ultram",
+    "tramazac"
+   ],
+   "cls": "Opioid analgesic",
+   "use": "Treats moderate to severe pain.",
+   "admin": "Follow the prescription strictly; it can be habit-forming.",
+   "warnings": [
+    "Can cause drowsiness and breathing problems.",
+    "Raises seizure risk and has serotonergic activity.",
+    "Activated via CYP2D6; interacting medicines change its effect."
+   ],
+   "substrate": [
+    "CYP2D6",
+    "CYP3A4"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "MOR",
+    "SERT"
+   ],
+   "pathways": [
+    "opioid_signaling",
+    "serotonin_signaling"
+   ],
+   "adverse": [
+    "serotonin_syndrome",
+    "seizures"
+   ],
+   "indications": [
+    "pain"
+   ]
+  },
+  {
+   "id": "clarithromycin",
+   "name": "Clarithromycin",
+   "aliases": [
+    "biaxin",
+    "klacid"
+   ],
+   "cls": "Macrolide antibiotic",
+   "use": "Treats certain bacterial infections.",
+   "admin": "Take the full course as prescribed.",
+   "warnings": [
+    "Strong CYP3A4 inhibitor, so interacts with many medicines.",
+    "Can prolong the QT interval."
+   ],
+   "substrate": [
+    "CYP3A4"
+   ],
+   "inhibits": [
+    "CYP3A4",
+    "PGP"
+   ],
+   "induces": [],
+   "targets": [
+    "BACT_RIBOSOME"
+   ],
+   "pathways": [
+    "bacterial_protein_synthesis"
+   ],
+   "adverse": [
+    "qt_prolongation"
+   ],
+   "indications": [
+    "infection"
+   ]
+  },
+  {
+   "id": "ciprofloxacin",
+   "name": "Ciprofloxacin",
+   "aliases": [
+    "cipro",
+    "ciplox"
+   ],
+   "cls": "Fluoroquinolone antibiotic",
+   "use": "Treats certain bacterial infections.",
+   "admin": "Take the full course as prescribed; separate from dairy/mineral supplements as the label advises.",
+   "warnings": [
+    "Tendon problems, nerve effects and QT prolongation are possible.",
+    "Inhibits CYP1A2; may increase warfarin effect in some people."
+   ],
+   "substrate": [],
+   "inhibits": [
+    "CYP1A2"
+   ],
+   "induces": [],
+   "targets": [
+    "GYRASE"
+   ],
+   "pathways": [
+    "bacterial_dna_replication"
+   ],
+   "adverse": [
+    "qt_prolongation"
+   ],
+   "indications": [
+    "infection"
+   ]
+  },
+  {
+   "id": "ketoconazole",
+   "name": "Ketoconazole",
+   "aliases": [
+    "nizoral"
+   ],
+   "cls": "Azole antifungal",
+   "use": "Treats certain fungal infections.",
+   "admin": "Follow your prescription; liver monitoring may be needed.",
+   "warnings": [
+    "Strong CYP3A4 inhibitor.",
+    "Can cause liver injury."
+   ],
+   "substrate": [
+    "CYP3A4"
+   ],
+   "inhibits": [
+    "CYP3A4",
+    "PGP"
+   ],
+   "induces": [],
+   "targets": [
+    "CYP51"
+   ],
+   "pathways": [
+    "fungal_sterol_synthesis"
+   ],
+   "adverse": [
+    "hepatotoxicity",
+    "qt_prolongation"
+   ],
+   "indications": [
+    "infection"
+   ]
+  },
+  {
+   "id": "methotrexate",
+   "name": "Methotrexate",
+   "aliases": [
+    "trexall",
+    "folitrax"
+   ],
+   "cls": "Antimetabolite / DMARD",
+   "use": "Used for certain cancers and autoimmune conditions such as rheumatoid arthritis.",
+   "admin": "Dosing schedules differ greatly (some are weekly); follow the prescription exactly.",
+   "warnings": [
+    "Can suppress bone marrow and affect liver and kidneys.",
+    "Reduced kidney clearance (e.g. with NSAIDs) can raise levels.",
+    "Regular blood tests are required."
+   ],
+   "substrate": [
+    "OCT2"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "DHFR"
+   ],
+   "pathways": [
+    "folate_metabolism"
+   ],
+   "adverse": [
+    "bone_marrow_suppression",
+    "hepatotoxicity",
+    "nephrotoxicity"
+   ],
+   "indications": [
+    "arthritis"
+   ]
+  },
+  {
+   "id": "naproxen",
+   "name": "Naproxen",
+   "aliases": [
+    "aleve",
+    "naprosyn"
+   ],
+   "cls": "NSAID",
+   "use": "Relieves pain and inflammation.",
+   "admin": "Usually taken with food; use the lowest effective dose per the label.",
+   "warnings": [
+    "Can cause stomach ulcers and bleeding.",
+    "May raise blood pressure and affect kidney function."
+   ],
+   "substrate": [
+    "CYP2C9"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "COX1",
+    "COX2"
+   ],
+   "pathways": [
+    "prostaglandin_synthesis"
+   ],
+   "adverse": [
+    "bleeding",
+    "gi_ulcer",
+    "nephrotoxicity"
+   ],
+   "indications": [
+    "pain",
+    "arthritis"
+   ]
+  },
+  {
+   "id": "diclofenac",
+   "name": "Diclofenac",
+   "aliases": [
+    "voltaren",
+    "voveran"
+   ],
+   "cls": "NSAID",
+   "use": "Relieves pain and inflammation.",
+   "admin": "Follow label or prescription; topical and oral forms differ.",
+   "warnings": [
+    "Can cause stomach ulcers and bleeding.",
+    "Cardiovascular and kidney risks with long-term use."
+   ],
+   "substrate": [
+    "CYP2C9"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "COX1",
+    "COX2"
+   ],
+   "pathways": [
+    "prostaglandin_synthesis"
+   ],
+   "adverse": [
+    "bleeding",
+    "gi_ulcer",
+    "nephrotoxicity"
+   ],
+   "indications": [
+    "pain",
+    "arthritis"
+   ]
+  },
+  {
+   "id": "spironolactone",
+   "name": "Spironolactone",
+   "aliases": [
+    "aldactone"
+   ],
+   "cls": "Potassium-sparing diuretic",
+   "use": "Treats heart failure, high blood pressure and fluid retention.",
+   "admin": "Follow your prescription; blood potassium is monitored.",
+   "warnings": [
+    "Can cause high potassium, especially with ACE inhibitors or ARBs.",
+    "Kidney function monitoring is important."
+   ],
+   "substrate": [],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "MR"
+   ],
+   "pathways": [
+    "raas",
+    "renal_potassium_handling"
+   ],
+   "adverse": [
+    "hyperkalemia"
+   ],
+   "indications": [
+    "heart_failure",
+    "hypertension"
+   ]
+  },
+  {
+   "id": "furosemide",
+   "name": "Furosemide",
+   "aliases": [
+    "lasix",
+    "frusemide"
+   ],
+   "cls": "Loop diuretic",
+   "use": "Removes excess fluid in heart failure, kidney or liver disease and can lower blood pressure.",
+   "admin": "Follow your prescription; timing is usually set to avoid night-time urination.",
+   "warnings": [
+    "Can lower potassium and sodium and cause dehydration.",
+    "Low potassium increases digoxin toxicity risk."
+   ],
+   "substrate": [],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "NKCC2"
+   ],
+   "pathways": [
+    "renal_potassium_handling"
+   ],
+   "adverse": [
+    "hypokalemia",
+    "hypotension"
+   ],
+   "indications": [
+    "heart_failure",
+    "hypertension"
+   ]
+  },
+  {
+   "id": "levothyroxine",
+   "name": "Levothyroxine",
+   "aliases": [
+    "synthroid",
+    "eltroxin",
+    "thyronorm"
+   ],
+   "cls": "Thyroid hormone",
+   "use": "Replaces thyroid hormone in hypothyroidism.",
+   "admin": "Absorption is affected by food and some supplements; follow your label's timing instructions.",
+   "warnings": [
+    "Dose is adjusted using blood tests.",
+    "Calcium, iron and some acid-reducing medicines can reduce absorption."
+   ],
+   "substrate": [],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "THYROID_RECEPTOR"
+   ],
+   "pathways": [
+    "thyroid_signaling"
+   ],
+   "adverse": [],
+   "indications": [
+    "hypothyroidism"
+   ]
+  },
+  {
+   "id": "sildenafil",
+   "name": "Sildenafil",
+   "aliases": [
+    "viagra",
+    "revatio"
+   ],
+   "cls": "PDE5 inhibitor",
+   "use": "Treats erectile dysfunction and, at other strengths, pulmonary arterial hypertension.",
+   "admin": "Follow your prescription.",
+   "warnings": [
+    "Must not be combined with nitrates; the combination can cause severe low blood pressure.",
+    "Seek urgent care for chest pain or prolonged erection."
+   ],
+   "substrate": [
+    "CYP3A4"
+   ],
+   "inhibits": [],
+   "induces": [],
+   "targets": [
+    "PDE5"
+   ],
+   "pathways": [
+    "no_cgmp_signaling",
+    "vascular_tone"
+   ],
+   "adverse": [
+    "hypotension"
+   ],
+   "indications": [
+    "erectile_dysfunction"
+   ]
+  },
+  {
+   "id": "nitroglycerin",
+   "name": "Nitroglycerin",
+   "aliases": [
+    "glyceryl trinitrate",
+    "gtn",
+    "nitrostat",
+    "sorbitrate"
+   ],
+   "cls": "Nitrate vasodilator",
+   "use": "Relieves or prevents angina (chest pain from reduced heart blood flow).",
+   "admin": "Forms (spray, sublingual, patch) are used differently; follow the label and your clinician's instructions.",
+   "warnings": [
+    "Can cause headache and low blood pressure.",
+    "Never combine with PDE5 inhibitors such as sildenafil.",
+    "Chest pain that does not settle needs urgent medical care."
+   ],
+   "substrate": [],
+   "inhibits": [],
+   "induces": [],
+   "targets": [],
+   "pathways": [
+    "no_cgmp_signaling",
+    "vascular_tone"
+   ],
+   "adverse": [
+    "hypotension"
+   ],
+   "indications": [
+    "angina"
+   ]
+  }
+ ]
+}

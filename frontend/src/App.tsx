@@ -19,7 +19,7 @@ import Settings from "./pages/Settings";
 import Subscription from "./pages/Subscription";
 
 export default function App() {
-  const { page, backendError, loading, refreshPatients, user, setUser } = useApp();
+  const { page, backendError, loading, refreshPatients, user, setUser, isMockMode } = useApp();
   const view = {
     dashboard: <Dashboard />, patients: <Patients />, scanner: <Scanner />, medicines: <MedicineInfo />, schedule: <Schedule />,
     "elder-agent": <ElderAgent />,
@@ -64,7 +64,7 @@ export default function App() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 rounded-md bg-white/5 px-2.5 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-300 border border-white/10">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              <span>GCN_V2.4 [ONLINE]</span>
+              <span>GCN_V2.4 [{isMockMode ? "STANDALONE_ENGINE" : "ONLINE_API"}]</span>
             </div>
             <div className="h-3 w-px bg-white/10" />
             <div className="font-mono text-[10px] uppercase tracking-wider text-neutral-400">
@@ -85,9 +85,31 @@ export default function App() {
                 <p className="mt-3 text-sm text-slate-500 font-mono">
                   Start the backend with <code className="rounded bg-white/10 px-1.5 py-0.5 border border-white/10 text-white">run_backend.bat</code> (Windows) or <code className="rounded bg-white/10 px-1.5 py-0.5 border border-white/10 text-white">uvicorn backend.main:app --port 8000</code>.
                 </p>
+                <button
+                  type="button"
+                  onClick={() => refreshPatients()}
+                  className="mt-4 rounded-md border border-cyan-400/40 bg-cyan-950/40 px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider text-cyan-300 hover:bg-cyan-900/50"
+                >
+                  Switch to Standalone Clinical Engine
+                </button>
               </div>
             ) : (
-              view
+              <>
+                {isMockMode && (
+                  <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-cyan-500/20 bg-cyan-950/20 px-4 py-2.5 font-mono text-xs text-cyan-200 backdrop-blur-md">
+                    <div className="flex items-center gap-2">
+                      <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
+                      <span className="font-bold text-white">[STANDALONE CLIENT ENGINE ACTIVE]</span>
+                      <span className="text-white/40">•</span>
+                      <span className="text-white/70">Running live in-browser with complete GCN biomedical knowledge graph & patient records.</span>
+                    </div>
+                    <span className="text-[10px] uppercase tracking-wider text-cyan-400/80 font-bold border border-cyan-500/30 px-2 py-0.5 rounded">
+                      GITHUB PAGES LIVE
+                    </span>
+                  </div>
+                )}
+                {view}
+              </>
             )}
           </div>
         </main>
